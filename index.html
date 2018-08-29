@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ROS Text Editor Online</title>
+    <style>
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .texthere {
+            width: 100%;
+            height: 100vw;
+            background-color: #FFF3E0;
+            color: #212121;
+            font-family: 'Roboto Slab', monospace;
+        }
+    </style>
+    <script>
+        function changeSize(value) {
+                document.getElementById("texthere").style.fontSize = value + "px";
+        }
+
+        function changeFont(value) {
+            if (value == 1) {
+                document.getElementById("texthere").style.fontFamily = "Roboto, sans-serif";
+            } else if (value == 2) {
+                document.getElementById("texthere").style.fontFamily = "Roboto Condensed, sans-serif";
+            } else if (value == 3) {
+                document.getElementById("texthere").style.fontFamily = "Roboto Slab, serif";
+            } else if (value == 4) {
+                document.getElementById("texthere").style.fontFamily = "Roboto Mono, mono";
+            } else {
+                console.log("Error: Invalid font name");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Simple header with fixed tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">ROS Text Editor Online</span>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Font Size</span>
+            <!-- Slider with Starting Value -->
+            <input class="mdl-slider mdl-js-slider" oninput="changeSize(this.value)" onchange="changeSize(this.value)" type="range" min="10" max="50" value="15" tabindex="0">
+            <span class="mdl-layout-title">Font Type</span>
+
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" onclick="changeFont(this.value)">
+                    <span class="mdl-radio__label">Regular</span>
+                </label>
+
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                    <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2" onclick="changeFont(this.value)">
+                    <span class="mdl-radio__label">Condensed</span>
+                </label>
+
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+                    <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="3" onclick="changeFont(this.value)" checked>
+                    <span class="mdl-radio__label">Slab</span>
+                </label>
+
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
+                    <input type="radio" id="option-4" class="mdl-radio__button" name="options" value="4"  onclick="changeFont(this.value)">
+                    <span class="mdl-radio__label">Mono</span>
+                </label>
+        </div>
+        <main class="mdl-layout__content">
+            <textarea class="texthere" id="texthere" style="font-size: 15px; font-family: Roboto Slab, serif">Welcome to ROS Plain Text Editor. Type away!</textarea>
+        </main>
+    </div>
+</body>
+
+<footer>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-design-lite@1/dist/material.indigo-red.min.css">
+    <script async defer src="https://cdn.jsdelivr.net/npm/material-design-lite@1/dist/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab">
+</footer>
+
+</html>
