@@ -1,3 +1,3 @@
 # ROS Text Editor Online
 
-A plain text editor for the web.
+This a text editor featuring Material Design for the web.

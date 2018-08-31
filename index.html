@@ -2,28 +2,229 @@
 <html lang="en">
 
 <head>
+    <!-- Common declarations -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- SEO -->
     <title>ROS Text Editor Online</title>
+    <meta name="description" content="This a text editor featuring Material Design for the web.">
+    <meta name="keywords" content="Notepad, Online Notepad, Online, Text, Editor, Text Editor, Online Text Editor, Website, HTML, CSS, JS">
+    <meta name="author" content="Richie Bendall">
+
+    <!-- Define web app manifests -->
+    <link rel="manifest" href="manifests/site.webmanifest">
+    <meta name="msapplication-config" content="manifests/browserconfig.xml">
+
+    <!-- Set theme colour -->
+    <meta name="theme-color" content="#3f51b5">
+
+    <!-- Set favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
     <style>
         body {
             height: 100%;
             margin: 0;
             font-family: 'Roboto', sans-serif;
+            background-color: #FFF3E0;
         }
 
         .texthere {
             width: 100%;
-            height: 100vw;
+            height: calc(100vh - 75px);
             background-color: #FFF3E0;
             color: #212121;
             font-family: 'Roboto Slab', monospace;
+            resize: none;
+        }
+
+        .mdl-dialog {
+            border: none;
+            box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+            width: 280px;
+        }
+
+        .mdl-dialog__title {
+            padding: 24px 24px 0;
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .mdl-dialog__actions {
+            padding: 8px 8px 8px 24px;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: row-reverse;
+            -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .mdl-dialog__actions>* {
+            margin-right: 8px;
+            height: 36px;
+        }
+
+        .mdl-dialog__actions>*:first-child {
+            margin-right: 0;
+        }
+
+        .mdl-dialog__actions--full-width {
+            padding: 0 0 8px 0;
+        }
+
+        .mdl-dialog__actions--full-width>* {
+            height: 48px;
+            -webkit-flex: 0 0 100%;
+            -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+            padding-right: 16px;
+            margin-right: 0;
+            text-align: right;
+        }
+
+        .mdl-dialog__content {
+            padding: 20px 24px 24px 24px;
+            color: rgba(0, 0, 0, 0.54);
         }
     </style>
-    <script>
+</head>
+
+<body>
+    <!-- Simple header with fixed tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">ROS Text Editor Online</span>
+                <div class="mdl-layout-spacer"></div>
+                <!-- FAB button with ripple -->
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect dialog-button">
+                    <i class="material-icons">settings</i>
+                </button>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer" style="padding: 20px;">
+            <span class="mdl-layout-title">Information</span>
+            <p>Configuration settings are in the header.</p>
+            <p>This website works offline.</p>
+            <span class="mdl-layout-title">Beta Features</span>
+            <p>All files marked with <i class="material-icons">bug_report</i> are currently in beta.</p>
+            <span class="mdl-layout-title">Open source</span>
+            <p>Open Source On <a href="https://github.com/Richienb/ROS-Text-Editor-Online">GitHub</a>.</p>
+            <p>Originally created by <a href="https://www.richie-bendall.ml/">Richie Bendall</a>.</p>
+
+        </div>
+        <main class="mdl-layout__content">
+            <textarea class="texthere" id="texthere" style="font-size: 15px; font-family: Roboto Slab, serif">Welcome to ROS Text Editor Online. Type away!</textarea>
+        </main>
+    </div>
+
+    <dialog id="dialog" class="mdl-dialog">
+        <h3 class="mdl-dialog__title">Configuration</h3>
+        <div class="mdl-dialog__content">
+            <h4>Font Size</h4>
+
+            <input class="mdl-slider mdl-js-slider" oninput="changeSize(this.value)" onchange="changeSize(this.value)" type="range" min="10" max="50" value="15" tabindex="0">
+            <h4>Font Type</h4>
+
+            <table style="width:100%">
+                <tr>
+                    <td>
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                            <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" onclick="changeFont(this.value)">
+                            <span class="mdl-radio__label">Regular</span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2" onclick="changeFont(this.value)">
+                            <span class="mdl-radio__label">Condensed</span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+                            <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="3" onclick="changeFont(this.value)" checked>
+                            <span class="mdl-radio__label">Slab</span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
+                            <input type="radio" id="option-4" class="mdl-radio__button" name="options" value="4" onclick="changeFont(this.value)">
+                            <span class="mdl-radio__label">Mono</span>
+                        </label>
+                    </td>
+                </tr>
+            </table>
+
+            <h4>Font Style</h4>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2" onchange="changeBold()">
+                <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
+                <span class="mdl-checkbox__label">Bold</span>
+            </label>
+
+            <h4>Save File <i class="material-icons">bug_report</i></h4>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="sample3" required>
+                    <label class="mdl-textfield__label" for="sample3">File Name</label>
+                </div>
+                <br>
+                <input type="submit" id="save" value="Save" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"></input>
+            </form>
+
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" id="closedialog" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
+        </div>
+    </dialog>
+
+</body>
+
+<footer>
+    <!-- MDL-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-design-lite@1/dist/material.indigo-red.min.css">
+    <script async defer src="https://cdn.jsdelivr.net/npm/material-design-lite@1/dist/material.min.js"></script>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab">
+
+    <!-- MDL dialog polyfill -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.4/dialog-polyfill.min.css">
+    <script async defer src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.4/dialog-polyfill.min.js"></script>
+
+    <script async defer>
+        (function() {
+            'use strict';
+            var dialogButton = document.querySelector('.dialog-button');
+            var dialog = document.querySelector('#dialog');
+            if (!dialog.showModal) {
+                dialogPolyfill.registerDialog(dialog);
+            }
+            dialogButton.addEventListener('click', function() {
+                dialog.showModal();
+            });
+            document.getElementById("closedialog")
+                .addEventListener('click', function() {
+                    dialog.close();
+                });
+        }());
+    </script>
+
+    <script async defer>
         function changeSize(value) {
-                document.getElementById("texthere").style.fontSize = value + "px";
+            document.getElementById("texthere").style.fontSize = value + "px";
         }
 
         function changeFont(value) {
@@ -39,54 +240,47 @@
                 console.log("Error: Invalid font name");
             }
         }
+
+        function changeBold() {
+            if (document.getElementById("checkbox-2").checked == true) {
+                document.getElementById("texthere").style.fontWeight = "900";
+            } else {
+                document.getElementById("texthere").style.fontWeight = "400";
+            }
+        }
+
+        function saveTextAsFile() {
+            var textToWrite = document.getElementById('texthere').innerHTML;
+            var textFileAsBlob = new Blob([textToWrite], {
+                type: 'text/plain'
+            });
+            var fileNameToSaveAs = "ecc.txt";
+
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            if (window.URL != null) {
+                // Chrome allows the link to be clicked without actually adding it to the DOM.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            } else {
+                // Firefox requires the link to be added to the DOM before it can be clicked.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                downloadLink.onclick = destroyClickedElement;
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+            }
+
+            downloadLink.click();
+        }
+
+        var button = document.getElementById('save');
+        button.addEventListener('click', saveTextAsFile);
+
+        function destroyClickedElement(event) {
+            // remove the link from the DOM
+            document.body.removeChild(event.target);
+        }
     </script>
-</head>
-
-<body>
-    <!-- Simple header with fixed tabs. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title">ROS Text Editor Online</span>
-            </div>
-        </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Font Size</span>
-            <!-- Slider with Starting Value -->
-            <input class="mdl-slider mdl-js-slider" oninput="changeSize(this.value)" onchange="changeSize(this.value)" type="range" min="10" max="50" value="15" tabindex="0">
-            <span class="mdl-layout-title">Font Type</span>
-
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" onclick="changeFont(this.value)">
-                    <span class="mdl-radio__label">Regular</span>
-                </label>
-
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                    <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2" onclick="changeFont(this.value)">
-                    <span class="mdl-radio__label">Condensed</span>
-                </label>
-
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
-                    <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="3" onclick="changeFont(this.value)" checked>
-                    <span class="mdl-radio__label">Slab</span>
-                </label>
-
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
-                    <input type="radio" id="option-4" class="mdl-radio__button" name="options" value="4"  onclick="changeFont(this.value)">
-                    <span class="mdl-radio__label">Mono</span>
-                </label>
-        </div>
-        <main class="mdl-layout__content">
-            <textarea class="texthere" id="texthere" style="font-size: 15px; font-family: Roboto Slab, serif">Welcome to ROS Plain Text Editor. Type away!</textarea>
-        </main>
-    </div>
-</body>
-
-<footer>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-design-lite@1/dist/material.indigo-red.min.css">
-    <script async defer src="https://cdn.jsdelivr.net/npm/material-design-lite@1/dist/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab">
 </footer>
 
 </html>
