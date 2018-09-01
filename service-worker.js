@@ -37,7 +37,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "44d1ad6c4560f69ba5cc43db8382cd85"
+    "revision": "174264f2ce51b2816465e005ecc13216"
   },
   {
     "url": "manifests/browserconfig.xml",
@@ -53,7 +53,7 @@ self.__precacheManifest = [
   },
   {
     "url": "README.md",
-    "revision": "8abc28083bc3a7b24ddb5d514ffee69e"
+    "revision": "50afd0800c5e491bccc179e918a50702"
   },
   {
     "url": "resources/android-chrome-36x36.png",
