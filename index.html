@@ -27,13 +27,13 @@
         html {
             font-family: 'Roboto', sans-serif;
         }
-
+        
         body {
             height: 100%;
             margin: 0;
             background-color: #FFF3E0;
         }
-
+        
         .texthere {
             width: 100%;
             height: calc(100vh - 75px);
@@ -42,7 +42,7 @@
             font-family: 'Roboto Slab', monospace;
             resize: none;
         }
-
+        
         .fabs-menu {
             position: fixed;
             bottom: 1px;
@@ -75,15 +75,18 @@
 
         </div>
         <main class="mdl-layout__content">
-          <div class="fabs-menu">
-              <!-- FAB button with ripple -->
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button">
-                  <i class="material-icons">settings</i>
-              </button>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button-save">
-                  <i class="material-icons">save</i>
-              </button>
-          </div>
+            <div class="fabs-menu">
+                <!-- FAB button with ripple -->
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button-reset">
+                    <i class="material-icons">refresh</i>
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button">
+                    <i class="material-icons">settings</i>
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button-save">
+                    <i class="material-icons">save</i>
+                </button>
+            </div>
             <textarea class="texthere" id="texthere" style="font-size: 15px; font-family: Roboto Slab, serif">Welcome to ROS Text Editor Online. Type away!</textarea>
         </main>
     </div>
@@ -160,7 +163,19 @@
             <button type="button" id="closedialog-save" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
         </div>
     </dialog>
-hi
+
+    <dialog id="dialog-reset" class="mdl-dialog">
+        <h3 class="mdl-dialog__title">Reset</h3>
+        <div class="mdl-dialog__content">
+            <h4>Reset Editor?</h4>
+
+        </div>
+        <div class="mdl-dialog__actions">
+
+            <button type="button" id="closedialog-reset" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
+            <button type="button" id="closedialog-reset" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="resettext();">Reset</button>
+        </div>
+    </dialog>
 </body>
 
 <footer>
@@ -176,6 +191,73 @@ hi
     <script async defer src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.4/dialog-polyfill.min.js"></script>
 
     <script async defer>
+        // Check if storage browser feature is avalible
+        if (typeof Storage !== "undefined") {
+            // Check if the text stored is nothing
+            if (localStorage.getItem("textstored") === "") {
+                // Set the contents of the text box to the default text
+                document.getElementById("texthere").innerHTML =
+                    "Welcome to ROS Text Editor Online. Type away!";
+            } else {
+                // Set the content that was already stored
+                document.getElementById("texthere").innerHTML = localStorage.getItem(
+                    "textstored"
+                );
+            }
+        }
+
+        // Reset the text
+        function resettext() {
+            document.getElementById("texthere").innerHTML =
+                "Welcome to ROS Text Editor Online. Type away!";
+        }
+
+        // Store the text
+        function storetext() {
+            // Check if storage is supported
+            if (typeof Storage !== "undefined") {
+                // Set the contents of textstored to the contents of texthere
+                localStorage.setItem(
+                    "textstored",
+                    document.getElementById("texthere").value
+                );
+            }
+        }
+
+        var area = document.getElementById("texthere");
+        if (area.addEventListener) {
+            area.addEventListener(
+                "input",
+                function() {
+                    // event handling code for same browsers
+                    storetext();
+                },
+                false
+            );
+        } else if (area.attachEvent) {
+            area.attachEvent("onpropertychange", function() {
+                // IE-specific event handling code
+                storetext();
+            });
+        }
+
+        var area = document.getElementById("texthere");
+        if (area.addEventListener) {
+            area.addEventListener(
+                "input",
+                function() {
+                    // event handling code for same browsers
+                    storetext();
+                },
+                false
+            );
+        } else if (area.attachEvent) {
+            area.attachEvent("onpropertychange", function() {
+                // IE-specific event handling code
+                storetext();
+            });
+        }
+
         function ActivateDialog(dialogButton, dialog, closebutton) {
             'use strict';
             var dialogButton = document.querySelector(dialogButton);
@@ -192,8 +274,10 @@ hi
                 });
         }
 
+        // Pair Dialogs With Buttons
         ActivateDialog('.dialog-button', '#dialog', "closedialog")
         ActivateDialog('.dialog-button-save', '#dialog-save', "closedialog-save")
+        ActivateDialog('.dialog-button-reset', '#dialog-reset', "closedialog-reset")
 
         function changeSize(value) {
             document.getElementById("texthere").style.fontSize = value + "px";
