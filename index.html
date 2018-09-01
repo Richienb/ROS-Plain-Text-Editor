@@ -174,7 +174,7 @@
                 <span class="mdl-checkbox__label">Bold</span>
             </label>
 
-            <h4>Save File <i class="material-icons">bug_report</i></h4>
+            <h4>Save File</h4>
             <form action="#">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="sample3" required>
@@ -254,7 +254,16 @@
             var textFileAsBlob = new Blob([textToWrite], {
                 type: 'text/plain'
             });
-            var fileNameToSaveAs = "ecc.txt";
+
+            if (document.getElementById('sample3').value == "" || document.getElementById('sample3').value == null) {
+                return;
+            } else if (document.getElementById('sample3').value.indexOf('.') !== -1) {
+                var filename = document.getElementById('sample3').value;
+            } else {
+                var filename = document.getElementById('sample3').value + ".txt";
+            }
+
+            var fileNameToSaveAs = filename;
 
             var downloadLink = document.createElement("a");
             downloadLink.download = fileNameToSaveAs;
