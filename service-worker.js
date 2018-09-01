@@ -37,7 +37,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "174264f2ce51b2816465e005ecc13216"
+    "revision": "120fd7780a38dafd51ed36d247920c64"
   },
   {
     "url": "manifests/browserconfig.xml",
