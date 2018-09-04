@@ -27,13 +27,13 @@
         html {
             font-family: 'Roboto', sans-serif;
         }
-        
+
         body {
             height: 100%;
             margin: 0;
             background-color: #FFF3E0;
         }
-        
+
         .texthere {
             width: 100%;
             height: calc(100vh - 75px);
@@ -42,7 +42,7 @@
             font-family: 'Roboto Slab', monospace;
             resize: none;
         }
-        
+
         .fabs-menu {
             position: fixed;
             bottom: 1px;
@@ -194,7 +194,7 @@
         // Check if storage browser feature is avalible
         if (typeof Storage !== "undefined") {
             // Check if the text stored is nothing
-            if (localStorage.getItem("textstored") === "") {
+            if (localStorage.getItem("textstored") === "" | typeof Storage === null) {
                 // Set the contents of the text box to the default text
                 document.getElementById("texthere").innerHTML =
                     "Welcome to ROS Text Editor Online. Type away!";
