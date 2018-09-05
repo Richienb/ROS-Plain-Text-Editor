@@ -158,6 +158,21 @@
                 <br>
                 <input type="submit" id="save" value="Save" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"></input>
             </form>
+            <h4>Load File <i class="material-icons">bug_report</i></h4>
+            <form action="#">
+                <input id="myFile" type="file" />
+                <br>
+                <input type="submit" onclick="loadfile();" value="Load" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"></input>
+            </form>
+            <h4>Clipboard</h4>
+            <!-- Raised button with ripple -->
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clipboardsave();">
+  Save
+</button>
+            <!-- Raised button with ripple -->
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clipboardload();">
+  Load
+</button>
         </div>
         <div class="mdl-dialog__actions">
             <button type="button" id="closedialog-save" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
@@ -206,10 +221,52 @@
             }
         }
 
+        // Load the contents of a file into the textarea
+        function loadfile() {
+            var file = document.getElementById("myFile").files[0];
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var textArea = document.getElementById("texthere");
+                textArea.value = e.target.result;
+            };
+            try {
+                reader.readAsText(file);
+            } catch (err) {
+                console.error("Could not load file: ", err);
+            }
+
+        }
+
         // Reset the text
         function resettext() {
             document.getElementById("texthere").innerHTML =
                 "Welcome to ROS Text Editor Online. Type away!";
+        }
+
+        // Save the contents of the textarea into the clipboard
+        function clipboardsave() {
+            navigator.clipboard.writeText(document.getElementById("texthere").value)
+                .then(() => {
+                    // Copy operation succeeded
+                })
+                .catch(err => {
+                    // This can happen if the user denies clipboard permissions:
+                    console.error('Could not copy text: ', err);
+                });
+        }
+
+
+        // Load the clipboard contents into the textarea
+        function clipboardload() {
+            navigator.clipboard.readText()
+                .then(text => {
+                    document.getElementById("texthere").value = text
+                    // Paste operation succeeded
+                })
+                .catch(err => {
+                    console.error('Failed to read clipboard contents: ', err);
+                });
         }
 
         // Store the text
