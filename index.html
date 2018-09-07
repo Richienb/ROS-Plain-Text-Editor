@@ -158,7 +158,7 @@
                 <br>
                 <input type="submit" id="save" value="Save" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"></input>
             </form>
-            <h4>Load File <i class="material-icons">bug_report</i></h4>
+            <h4>Load File</h4>
             <form action="#">
                 <input id="myFile" type="file" />
                 <br>
@@ -167,12 +167,12 @@
             <h4>Clipboard</h4>
             <!-- Raised button with ripple -->
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clipboardsave();">
-  Save
-</button>
+                Save
+            </button>
             <!-- Raised button with ripple -->
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clipboardload();">
-  Load
-</button>
+                Load
+            </button>
         </div>
         <div class="mdl-dialog__actions">
             <button type="button" id="closedialog-save" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
@@ -209,7 +209,7 @@
         // Check if storage browser feature is avalible
         if (typeof Storage !== "undefined") {
             // Check if the text stored is nothing
-            if (localStorage.getItem("textstored") === "" | typeof Storage === null) {
+            if (localStorage.getItem("textstored") === "" | localStorage.getItem("textstored") === null) {
                 // Set the contents of the text box to the default text
                 document.getElementById("texthere").innerHTML =
                     "Welcome to ROS Text Editor Online. Type away!";
@@ -233,7 +233,7 @@
             try {
                 reader.readAsText(file);
             } catch (err) {
-                console.error("Could not load file: ", err);
+                console.warn('Could not load file: ', err);
             }
 
         }
@@ -242,6 +242,11 @@
         function resettext() {
             document.getElementById("texthere").innerHTML =
                 "Welcome to ROS Text Editor Online. Type away!";
+            if (typeof Storage !== "undefined") {
+                // Set the contents of the text box to the default text
+                document.getElementById("texthere").innerHTML =
+                    "Welcome to ROS Text Editor Online. Type away!";
+            }
         }
 
         // Save the contents of the textarea into the clipboard
@@ -252,20 +257,19 @@
                 })
                 .catch(err => {
                     // This can happen if the user denies clipboard permissions:
-                    console.error('Could not copy text: ', err);
+                    console.warn('Could not copy text: ', err);
                 });
         }
-
 
         // Load the clipboard contents into the textarea
         function clipboardload() {
             navigator.clipboard.readText()
                 .then(text => {
                     document.getElementById("texthere").value = text
-                    // Paste operation succeeded
+                        // Paste operation succeeded
                 })
                 .catch(err => {
-                    console.error('Failed to read clipboard contents: ', err);
+                    console.warn('Failed to read clipboard contents: ', err);
                 });
         }
 
