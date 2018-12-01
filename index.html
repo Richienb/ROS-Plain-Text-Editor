@@ -2,410 +2,412 @@
 <html lang="en">
 
 <head>
-    <!-- Common declarations -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Common declarations -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- SEO -->
-    <title>ROS Text Editor Online</title>
-    <meta name="description" content="This a text editor featuring Material Design for the web.">
-    <meta name="keywords" content="Notepad, Online Notepad, Online, Text, Editor, Text Editor, Online Text Editor, Website, HTML, CSS, JS">
-    <meta name="author" content="Richie Bendall">
+  <!-- SEO -->
+  <title>ROS Text Editor Online</title>
+  <meta name="description" content="This a text editor featuring Material Design for the web.">
+  <meta name="keywords" content="Notepad, Online Notepad, Online, Text, Editor, Text Editor, Online Text Editor, Website, HTML, CSS, JS">
+  <meta name="author" content="Richie Bendall">
 
-    <!-- Define web app manifests -->
-    <link rel="manifest" href="manifests/site.webmanifest">
-    <meta name="msapplication-config" content="manifests/browserconfig.xml">
+  <!-- Define web app manifests -->
+  <link rel="manifest" href="manifests/site.webmanifest">
+  <meta name="msapplication-config" content="manifests/browserconfig.xml">
 
-    <!-- Set theme colour -->
-    <meta name="theme-color" content="#3f51b5">
+  <!-- Set theme colour -->
+  <meta name="theme-color" content="#3f51b5">
 
-    <!-- Set favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Set favicon -->
+  <link rel="shortcut icon" href="favicon.ico">
 
-    <style>
-        html {
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        body {
-            height: 100%;
-            margin: 0;
-            background-color: #FFF3E0;
-        }
-        
-        .texthere {
-            width: 100%;
-            height: calc(100vh - 75px);
-            background-color: #FFF3E0;
-            color: #212121;
-            font-family: 'Roboto Slab', monospace;
-            resize: none;
-        }
-        
-        .fabs-menu {
-            position: fixed;
-            bottom: 1px;
-            right: 1px;
-            padding: 10px;
-        }
-    </style>
+  <style>
+    html {
+      font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background-color: #FFF3E0;
+    }
+
+    .texthere {
+      width: 100%;
+      height: calc(100vh - 76px);
+      background-color: #FFF3E0;
+      padding: 5px;
+      color: #212121;
+      font-family: 'Roboto Slab', monospace;
+      resize: none;
+    }
+
+    .fabs-menu {
+      position: fixed;
+      bottom: 20px;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      left: 50%;
+      position: absolute;
+      z-index: 999;
+    }
+
+    .fabs-menu button {
+      margin-right: 20px;
+    }
+  </style>
 
 </head>
 
 <body>
-    <!-- Simple header with fixed tabs. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title">ROS Text Editor Online</span>
-                <div class="mdl-layout-spacer"></div>
-            </div>
-        </header>
-        <div class="mdl-layout__drawer" style="padding: 20px;">
-            <span class="mdl-layout-title">Information</span>
-            <p>Configuration settings are in the header.</p>
-            <p>This website works offline.</p>
-            <span class="mdl-layout-title">Beta Features</span>
-            <p>All options marked with <i class="material-icons">bug_report</i> are currently in beta.</p>
-            <span class="mdl-layout-title">Open source</span>
-            <p>Open Source On <a href="https://github.com/Richienb/ROS-Text-Editor-Online">GitHub</a>.</p>
-            <p>Originally created by <a href="https://www.richie-bendall.ml/">Richie Bendall</a>.</p>
+  <!-- Simple header with fixed tabs. -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">ROS Text Editor Online</span>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer" style="padding: 20px;">
+      <span class="mdl-layout-title">Information</span>
+      <p>Configuration settings are in the header.</p>
+      <p>This website works offline.</p>
+      <span class="mdl-layout-title">Beta Features</span>
+      <p>All options marked with
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5s-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-4 4v3c0 .22-.03.47-.07.7l-.1.65-.37.65c-.72 1.24-2.04 2-3.46 2s-2.74-.77-3.46-2l-.37-.64-.1-.65C8.03 15.48 8 15.23 8 15v-4c0-.23.03-.48.07-.7l.1-.65.37-.65c.3-.52.72-.97 1.21-1.31l.57-.39.74-.18c.31-.08.63-.12.94-.12.32 0 .63.04.95.12l.68.16.61.42c.5.34.91.78 1.21 1.31l.38.65.1.65c.04.22.07.47.07.69v1zm-6 2h4v2h-4zm0-4h4v2h-4z"/></svg>        are currently in beta.</p>
+      <span class="mdl-layout-title">Open source</span>
+      <p>Open Source On <a href="https://github.com/Richienb/ROS-Text-Editor-Online">GitHub</a>.</p>
+      <p>Originally created by <a href="https://www.richie-bendall.ml/">Richie Bendall</a>.</p>
 
-        </div>
-        <main class="mdl-layout__content">
-            <div class="fabs-menu">
-                <!-- FAB button with ripple -->
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button-reset">
-                    <i class="material-icons">refresh</i>
-                </button>
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button">
-                    <i class="material-icons">settings</i>
-                </button>
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button-save">
-                    <i class="material-icons">save</i>
-                </button>
-            </div>
-
-            <textarea class="texthere" id="texthere" style="font-size: 15px; font-family: Roboto Slab, serif">Welcome to ROS Text Editor Online. Type away!</textarea>
-        </main>
     </div>
+    <main class="mdl-layout__content">
+      <div class="fabs-menu">
+        <!-- FAB button with ripple -->
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button-reset">
+                    
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                </button>
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button">
+                    
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                </button>
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored dialog-button-save">
+                    
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z"/></svg>
+                </button>
+      </div>
 
-    <dialog id="dialog" class="mdl-dialog">
-        <h3 class="mdl-dialog__title">Configuration</h3>
-        <div class="mdl-dialog__content">
-            <h4>Font Size</h4>
+      <textarea class="texthere" id="texthere" style="font-size: 15px; font-family: Roboto Slab, serif">Welcome to ROS Text Editor Online. Type away!</textarea>
+    </main>
+  </div>
 
-            <input class="mdl-slider mdl-js-slider" oninput="changeSize(this.value)" onchange="changeSize(this.value)" type="range" min="10" max="50" value="15" tabindex="0">
-            <h4>Font Type</h4>
+  <dialog id="dialog" class="mdl-dialog">
+    <h3 class="mdl-dialog__title">Configuration</h3>
+    <div class="mdl-dialog__content">
+      <h4>Font Size</h4>
 
-            <table style="width:100%">
-                <tr>
-                    <td>
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+      <input class="mdl-slider mdl-js-slider" oninput="changeSize(this.value)" onchange="changeSize(this.value)" type="range" min="10" max="50" value="15" tabindex="0">
+      <h4>Font Type</h4>
+
+      <table style="width:100%">
+        <tr>
+          <td>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
                             <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" onclick="changeFont(this.value)">
                             <span class="mdl-radio__label">Regular</span>
                         </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
                             <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2" onclick="changeFont(this.value)">
                             <span class="mdl-radio__label">Condensed</span>
                         </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
                             <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="3" onclick="changeFont(this.value)" checked>
                             <span class="mdl-radio__label">Slab</span>
                         </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
                             <input type="radio" id="option-4" class="mdl-radio__button" name="options" value="4" onclick="changeFont(this.value)">
                             <span class="mdl-radio__label">Mono</span>
                         </label>
-                    </td>
-                </tr>
-            </table>
+          </td>
+        </tr>
+      </table>
 
-            <h4>Font Style</h4>
-            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2" onchange="changeBold()">
+      <h4>Font Style</h4>
+      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2" onchange="changeBold()">
                 <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
                 <span class="mdl-checkbox__label">Bold</span>
             </label>
 
+    </div>
+    <div class="mdl-dialog__actions">
+      <button type="button" id="closedialog" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
+    </div>
+  </dialog>
+
+  <dialog id="dialog-save" class="mdl-dialog">
+    <h3 class="mdl-dialog__title">File Options</h3>
+    <div class="mdl-dialog__content">
+      <h4>Save File</h4>
+      <form action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="sample3" required>
+          <label class="mdl-textfield__label" for="sample3">File Name</label>
         </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" id="closedialog" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
-        </div>
-    </dialog>
+        <br>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  Save
+</button>
+      </form>
+      <h4>Load File</h4>
+      <form action="#">
+        <input id="myFile" type="file" required/>
+        <br><br>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  Load
+</button>
+      </form>
+      <h4>Clipboard</h4>
+      <!-- Raised button with ripple -->
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="clipboardsave();">
+  Save
+</button>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="clipboardload();">
+  Load
+</button>
+    </div>
+    <div class="mdl-dialog__actions">
+      <button type="button" id="closedialog-save" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
+    </div>
+  </dialog>
 
-    <dialog id="dialog-save" class="mdl-dialog">
-        <h3 class="mdl-dialog__title">File Options</h3>
-        <div class="mdl-dialog__content">
-            <h4>Save File</h4>
-            <form action="#">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="sample3" required>
-                    <label class="mdl-textfield__label" for="sample3">File Name</label>
-                </div>
-                <br>
-                <input type="submit" id="save" value="Save" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"></input>
-            </form>
-            <h4>Load File</h4>
-            <form action="#">
-                <input id="myFile" type="file" />
-                <br>
-                <input type="submit" onclick="loadfile();" value="Load" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"></input>
-            </form>
-            <h4>Clipboard</h4>
-            <!-- Raised button with ripple -->
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clipboardsave();">
-                Save
-            </button>
-            <!-- Raised button with ripple -->
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clipboardload();">
-                Load
-            </button>
-        </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" id="closedialog-save" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
-        </div>
-    </dialog>
+  <dialog id="dialog-reset" class="mdl-dialog">
+    <h3 class="mdl-dialog__title">Reset Editor?</h3>
+    <br>
+    <div class="mdl-dialog__actions">
 
-    <dialog id="dialog-reset" class="mdl-dialog">
-        <h3 class="mdl-dialog__title">Reset</h3>
-        <div class="mdl-dialog__content">
-            <h4>Reset Editor?</h4>
+      <button type="button" id="closedialog-reset" class="mdl-button mdl-js-button mdl-js-ripple-effect">Cancel</button>
+      <button type="button" id="closedialog-reset" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="resettext();">Reset</button>
+    </div>
+  </dialog>
 
-        </div>
-        <div class="mdl-dialog__actions">
+  <!-- MDL-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-red.min.css">
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.js"></script>
 
-            <button type="button" id="closedialog-reset" class="mdl-button mdl-js-button mdl-js-ripple-effect">Close</button>
-            <button type="button" id="closedialog-reset" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="resettext();">Reset</button>
-        </div>
-    </dialog>
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto:300,400,500|Roboto+Condensed|Roboto+Mono|Roboto+Slab">
 
-    <!-- MDL-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-red.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.js"></script>
+  <!-- Dialog polyfill -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.10/dialog-polyfill.min.css">
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.10/dialog-polyfill.min.js"></script>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto:300,400,500|Roboto+Condensed|Roboto+Mono|Roboto+Slab">
+  <!-- Resetters -->
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
 
-    <!-- Dialog polyfill -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.10/dialog-polyfill.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.10/dialog-polyfill.min.js"></script>
+  <script>
+    // Check if storage browser feature is avalible
+    if (typeof Storage !== "undefined") {
+      // Check if the text stored is nothing
+      if (localStorage.getItem("textstored") === "" | localStorage.getItem("textstored") === null) {
+        // Set the contents of the text box to the default text
+        document.getElementById("texthere").innerHTML =
+          "Welcome to ROS Text Editor Online. Type away!";
+      } else {
+        // Set the content that was already stored
+        document.getElementById("texthere").innerHTML = localStorage.getItem(
+          "textstored"
+        );
+      }
+    }
+    // Load the contents of a file into the textarea
+    function loadfile() {
+      var file = document.getElementById("myFile").files[0];
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var textArea = document.getElementById("texthere");
+        textArea.value = e.target.result;
+      };
+      try {
+        reader.readAsText(file);
+      } catch (err) {
+        console.warn('Could not load file: ', err);
+      }
+    }
+    // Reset the text
+    function resettext() {
+      document.getElementById("texthere").innerHTML =
+        "Welcome to ROS Text Editor Online. Type away!";
+      if (typeof Storage !== "undefined") {
+        // Set the contents of the text box to the default text
+        document.getElementById("texthere").innerHTML =
+          "Welcome to ROS Text Editor Online. Type away!";
+      }
+    }
+    // Save the contents of the textarea into the clipboard
+    function clipboardsave() {
+      navigator.clipboard.writeText(document.getElementById("texthere").value)
+        .then(() => {
+          // Copy operation succeeded
+        })
+        .catch(err => {
+          // This can happen if the user denies clipboard permissions:
+          console.warn('Could not copy text: ', err);
+        });
+    }
+    // Load the clipboard contents into the textarea
+    function clipboardload() {
+      navigator.clipboard.readText()
+        .then(text => {
+          document.getElementById("texthere").value = text
+          // Paste operation succeeded
+        })
+        .catch(err => {
+          console.warn('Failed to read clipboard contents: ', err);
+        });
+    }
+    // Store the text
+    function storetext() {
+      // Check if storage is supported
+      if (typeof Storage !== "undefined") {
+        // Set the contents of textstored to the contents of texthere
+        localStorage.setItem(
+          "textstored",
+          document.getElementById("texthere").value
+        );
+      }
+    }
+    var area = document.getElementById("texthere");
+    if (area.addEventListener) {
+      area.addEventListener(
+        "input",
+        function() {
+          // event handling code for same browsers
+          storetext();
+        },
+        false
+      );
+    } else if (area.attachEvent) {
+      area.attachEvent("onpropertychange", function() {
+        // IE-specific event handling code
+        storetext();
+      });
+    }
+    var area = document.getElementById("texthere");
+    if (area.addEventListener) {
+      area.addEventListener(
+        "input",
+        function() {
+          // event handling code for same browsers
+          storetext();
+        },
+        false
+      );
+    } else if (area.attachEvent) {
+      area.attachEvent("onpropertychange", function() {
+        // IE-specific event handling code
+        storetext();
+      });
+    }
 
-    <script>
-        // Check if storage browser feature is avalible
-        if (typeof Storage !== "undefined") {
-            // Check if the text stored is nothing
-            if (localStorage.getItem("textstored") === "" | localStorage.getItem("textstored") === null) {
-                // Set the contents of the text box to the default text
-                document.getElementById("texthere").innerHTML =
-                    "Welcome to ROS Text Editor Online. Type away!";
-            } else {
-                // Set the content that was already stored
-                document.getElementById("texthere").innerHTML = localStorage.getItem(
-                    "textstored"
-                );
-            }
-        }
+    function ActivateDialog(dialogButton, dialog, closebutton) {
+      'use strict';
+      var dialogButton = document.querySelector(dialogButton);
+      var dialog = document.querySelector(dialog);
+      if (!dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+      }
+      dialogButton.addEventListener('click', function() {
+        dialog.showModal();
+      });
+      document.getElementById(closebutton)
+        .addEventListener('click', function() {
+          dialog.close();
+        });
+    }
+    // Pair Dialogs With Buttons
+    ActivateDialog('.dialog-button', '#dialog', "closedialog")
+    ActivateDialog('.dialog-button-save', '#dialog-save', "closedialog-save")
+    ActivateDialog('.dialog-button-reset', '#dialog-reset', "closedialog-reset")
 
-        // Load the contents of a file into the textarea
-        function loadfile() {
-            var file = document.getElementById("myFile").files[0];
+    function changeSize(value) {
+      document.getElementById("texthere").style.fontSize = value + "px";
+    }
 
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var textArea = document.getElementById("texthere");
-                textArea.value = e.target.result;
-            };
-            try {
-                reader.readAsText(file);
-            } catch (err) {
-                console.warn('Could not load file: ', err);
-            }
+    function changeFont(value) {
+      if (value == 1) {
+        document.getElementById("texthere").style.fontFamily = "Roboto, sans-serif";
+      } else if (value == 2) {
+        document.getElementById("texthere").style.fontFamily = "Roboto Condensed, sans-serif";
+      } else if (value == 3) {
+        document.getElementById("texthere").style.fontFamily = "Roboto Slab, serif";
+      } else if (value == 4) {
+        document.getElementById("texthere").style.fontFamily = "Roboto Mono, mono";
+      } else {
+        console.log("Error: Invalid font name");
+      }
+    }
 
-        }
+    function changeBold() {
+      if (document.getElementById("checkbox-2").checked == true) {
+        document.getElementById("texthere").style.fontWeight = "900";
+      } else {
+        document.getElementById("texthere").style.fontWeight = "400";
+      }
+    }
 
-        // Reset the text
-        function resettext() {
-            document.getElementById("texthere").innerHTML =
-                "Welcome to ROS Text Editor Online. Type away!";
-            if (typeof Storage !== "undefined") {
-                // Set the contents of the text box to the default text
-                document.getElementById("texthere").innerHTML =
-                    "Welcome to ROS Text Editor Online. Type away!";
-            }
-        }
+    function saveTextAsFile() {
+      var textToWrite = document.getElementById('texthere').innerHTML;
+      var textFileAsBlob = new Blob([textToWrite], {
+        type: 'text/plain'
+      });
+      if (document.getElementById('sample3').value == "" || document.getElementById('sample3').value == null) {
+        return;
+      } else if (document.getElementById('sample3').value.indexOf('.') !== -1) {
+        var filename = document.getElementById('sample3').value;
+      } else {
+        var filename = document.getElementById('sample3').value + ".txt";
+      }
+      var fileNameToSaveAs = filename;
+      var downloadLink = document.createElement("a");
+      downloadLink.download = fileNameToSaveAs;
+      downloadLink.innerHTML = "Download File";
+      if (window.URL != null) {
+        // Chrome allows the link to be clicked without actually adding it to the DOM.
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+      } else {
+        // Firefox requires the link to be added to the DOM before it can be clicked.
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+      }
+      downloadLink.click();
+    }
+    var button = document.getElementById('save');
+    button.addEventListener('click', saveTextAsFile);
 
-        // Save the contents of the textarea into the clipboard
-        function clipboardsave() {
-            navigator.clipboard.writeText(document.getElementById("texthere").value)
-                .then(() => {
-                    // Copy operation succeeded
-                })
-                .catch(err => {
-                    // This can happen if the user denies clipboard permissions:
-                    console.warn('Could not copy text: ', err);
-                });
-        }
-
-        // Load the clipboard contents into the textarea
-        function clipboardload() {
-            navigator.clipboard.readText()
-                .then(text => {
-                    document.getElementById("texthere").value = text
-                        // Paste operation succeeded
-                })
-                .catch(err => {
-                    console.warn('Failed to read clipboard contents: ', err);
-                });
-        }
-
-        // Store the text
-        function storetext() {
-            // Check if storage is supported
-            if (typeof Storage !== "undefined") {
-                // Set the contents of textstored to the contents of texthere
-                localStorage.setItem(
-                    "textstored",
-                    document.getElementById("texthere").value
-                );
-            }
-        }
-
-        var area = document.getElementById("texthere");
-        if (area.addEventListener) {
-            area.addEventListener(
-                "input",
-                function() {
-                    // event handling code for same browsers
-                    storetext();
-                },
-                false
-            );
-        } else if (area.attachEvent) {
-            area.attachEvent("onpropertychange", function() {
-                // IE-specific event handling code
-                storetext();
-            });
-        }
-
-        var area = document.getElementById("texthere");
-        if (area.addEventListener) {
-            area.addEventListener(
-                "input",
-                function() {
-                    // event handling code for same browsers
-                    storetext();
-                },
-                false
-            );
-        } else if (area.attachEvent) {
-            area.attachEvent("onpropertychange", function() {
-                // IE-specific event handling code
-                storetext();
-            });
-        }
-
-        function ActivateDialog(dialogButton, dialog, closebutton) {
-            'use strict';
-            var dialogButton = document.querySelector(dialogButton);
-            var dialog = document.querySelector(dialog);
-            if (!dialog.showModal) {
-                dialogPolyfill.registerDialog(dialog);
-            }
-            dialogButton.addEventListener('click', function() {
-                dialog.showModal();
-            });
-            document.getElementById(closebutton)
-                .addEventListener('click', function() {
-                    dialog.close();
-                });
-        }
-
-        // Pair Dialogs With Buttons
-        ActivateDialog('.dialog-button', '#dialog', "closedialog")
-        ActivateDialog('.dialog-button-save', '#dialog-save', "closedialog-save")
-        ActivateDialog('.dialog-button-reset', '#dialog-reset', "closedialog-reset")
-
-        function changeSize(value) {
-            document.getElementById("texthere").style.fontSize = value + "px";
-        }
-
-        function changeFont(value) {
-            if (value == 1) {
-                document.getElementById("texthere").style.fontFamily = "Roboto, sans-serif";
-            } else if (value == 2) {
-                document.getElementById("texthere").style.fontFamily = "Roboto Condensed, sans-serif";
-            } else if (value == 3) {
-                document.getElementById("texthere").style.fontFamily = "Roboto Slab, serif";
-            } else if (value == 4) {
-                document.getElementById("texthere").style.fontFamily = "Roboto Mono, mono";
-            } else {
-                console.log("Error: Invalid font name");
-            }
-        }
-
-        function changeBold() {
-            if (document.getElementById("checkbox-2").checked == true) {
-                document.getElementById("texthere").style.fontWeight = "900";
-            } else {
-                document.getElementById("texthere").style.fontWeight = "400";
-            }
-        }
-
-        function saveTextAsFile() {
-            var textToWrite = document.getElementById('texthere').innerHTML;
-            var textFileAsBlob = new Blob([textToWrite], {
-                type: 'text/plain'
-            });
-
-            if (document.getElementById('sample3').value == "" || document.getElementById('sample3').value == null) {
-                return;
-            } else if (document.getElementById('sample3').value.indexOf('.') !== -1) {
-                var filename = document.getElementById('sample3').value;
-            } else {
-                var filename = document.getElementById('sample3').value + ".txt";
-            }
-
-            var fileNameToSaveAs = filename;
-
-            var downloadLink = document.createElement("a");
-            downloadLink.download = fileNameToSaveAs;
-            downloadLink.innerHTML = "Download File";
-            if (window.URL != null) {
-                // Chrome allows the link to be clicked without actually adding it to the DOM.
-                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-            } else {
-                // Firefox requires the link to be added to the DOM before it can be clicked.
-                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-                downloadLink.onclick = destroyClickedElement;
-                downloadLink.style.display = "none";
-                document.body.appendChild(downloadLink);
-            }
-
-            downloadLink.click();
-        }
-
-        var button = document.getElementById('save');
-        button.addEventListener('click', saveTextAsFile);
-
-        function destroyClickedElement(event) {
-            // remove the link from the DOM
-            document.body.removeChild(event.target);
-        }
-    </script>
+    function destroyClickedElement(event) {
+      // remove the link from the DOM
+      document.body.removeChild(event.target);
+    }
+  </script>
 
 </body>
 
